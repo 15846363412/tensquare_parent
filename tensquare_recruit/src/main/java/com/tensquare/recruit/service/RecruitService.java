@@ -19,6 +19,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import org.springframework.web.bind.annotation.RequestMapping;
 import util.IdWorker;
 
 import com.tensquare.recruit.dao.RecruitDao;
@@ -39,6 +40,12 @@ public class RecruitService {
 	@Autowired
 	private IdWorker idWorker;
 
+	public List<Recruit> recommend(){
+		return recruitDao.findTop6ByStateOrderByCreatetimeDesc("2");
+	}
+	public List<Recruit> newlist(){
+		return recruitDao.findTop6ByStateNotOrderByCreatetimeDesc("0");
+	}
 	/**
 	 * 查询全部列表
 	 * @return
