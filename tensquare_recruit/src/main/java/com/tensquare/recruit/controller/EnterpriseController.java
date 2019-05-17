@@ -17,6 +17,9 @@ import com.tensquare.recruit.service.EnterpriseService;
 import entity.PageResult;
 import entity.Result;
 import entity.StatusCode;
+
+import javax.xml.bind.ValidationEvent;
+
 /**
  * 控制器层
  * @author Administrator
@@ -29,8 +32,14 @@ public class EnterpriseController {
 
 	@Autowired
 	private EnterpriseService enterpriseService;
-	
-	
+
+	@RequestMapping(value = "/search/hotlist", method = RequestMethod.GET)
+	public Result hotList(){
+		List<Enterprise> list = enterpriseService.hotList("1");
+		return new Result(true, StatusCode.OK, "查询成功", list);
+	}
+
+
 	/**
 	 * 查询全部数据
 	 * @return
