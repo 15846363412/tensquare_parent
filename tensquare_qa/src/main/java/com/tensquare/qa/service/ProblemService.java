@@ -11,10 +11,12 @@ import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
+import javax.swing.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -38,6 +40,19 @@ public class ProblemService {
 	
 	@Autowired
 	private IdWorker idWorker;
+
+	public Page<Problem> newList(String labelid,int page, int rows){
+		Pageable pageable1 = PageRequest.of(page-1, rows);
+		return problemDao.newList(labelid,pageable1);
+	}
+	public Page<Problem> hotList(String labelid,int page, int rows){
+		Pageable pageable1 = PageRequest.of(page-1, rows);
+		return problemDao.hotList(labelid,pageable1);
+	}
+	public Page<Problem> waitList(String labelid,int page, int rows){
+		Pageable pageable1 = PageRequest.of(page-1, rows);
+		return problemDao.waitList(labelid,pageable1);
+	}
 
 	/**
 	 * 查询全部列表
